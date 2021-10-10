@@ -1,0 +1,4 @@
+{
+    "db": "mongodb+srv://aqqu-backend:MmpXI2P9CD8k4MYb@cluster0.lso8k.mongodb.net/aqqu?retryWrites=true&w=majority",
+    "jwt_key": "cW%34>B<<#sd,DZE"
+}

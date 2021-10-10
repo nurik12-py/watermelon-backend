@@ -1,0 +1,4 @@
+{
+    "db": "mongodb://localhost/projectX",
+    "jwt_key": "superpassword01"
+}
