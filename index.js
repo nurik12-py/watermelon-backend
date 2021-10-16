@@ -13,11 +13,9 @@ const io = require('socket.io')(server, {
 const compression = require("compression");
 app.use(compression());
 app.use(cors());
-app.use(express.static('public'));
 require("./bootstrap/db")();
 require("./bootstrap/routes")(app);
 require("./bootstrap/sockets")(io);
-require("./bootstrap/peerHandler")(app, server);
 require("./bootstrap/config")();
 
 
