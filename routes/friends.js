@@ -5,21 +5,22 @@ const { User } = require("../models/user");
 const auth = require('../middleware/auth');
 const mongoose = require("mongoose");
 
-router.get("/friends", auth, async (req, res) => {
+router.get("/", auth, async (req, res) => {
     const user = await User.findById(req.user._id);
-    const friends = await User.find({ '_id': { $in: user.friends } }).select("firstName");
+    const friends = await User.find({ '_id': { $in: user.friends } });
     return res.send(friends);
 });
 
-router.post("/friends", auth, async (req, res) => {
+router.post("/", auth, async (req, res) => {
     const friendId = new mongoose.mongo.ObjectId(req.body.friendId);
-    const user = await User.findOneAndUpdate({ '_id': req.user._id }, { $push: { friends: friendId } });
+    const result = await User.findOneAndUpdate({ '_id': req.user._id }, { $pull: { friendRequests: friendId } });
+    const user1 = await User.findOneAndUpdate({ '_id': friendId }, { $push: { friends: req.user._id } });
+    const user2 = await User.findOneAndUpdate({ '_id': req.user._id }, { $push: { friends: friendId } });
     return res.send(friendId);
 });
 
-router.delete("/friends", auth, async (req, res) => {
-    const friendId = req.body.friendId;
-    console.log(friendId);
+router.delete("/", auth, async (req, res) => {
+    const friendId = req.query.friendId;
     const result = await User.findOneAndUpdate({ '_id': req.user._id }, { $pull: { friends: friendId } });
     return res.send(result);
 });

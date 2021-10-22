@@ -13,6 +13,12 @@ router.get("/me", auth, async (req, res) => {
   return res.send(user);
 })
 
+router.get("/", auth, async (req, res) => {
+  let { query } = req.query;
+  const pattern = `^${query}`;
+  const users = await User.find({ firstName: { $regex: pattern, $options: "i" } }).select("-password");
+  return res.send(users);
+});
 
 router.put("/", auth, async (req, res) => {
   const { firstName, lastName, avatarName, avatarColor } = req.body;

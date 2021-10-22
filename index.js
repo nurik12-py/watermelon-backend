@@ -13,8 +13,8 @@ const io = require('socket.io')(server, {
 const compression = require("compression");
 app.use(compression());
 app.use(cors());
-// require("./bootstrap/db")();
-// require("./bootstrap/routes")(app);
+require("./bootstrap/db")();
+require("./bootstrap/routes")(app);
 require("./bootstrap/sockets")(io);
 require("./bootstrap/config")();
 
