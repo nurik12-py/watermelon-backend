@@ -1,0 +1,4 @@
+{
+    "db": "mongodb+srv://nurikuser:aAhgqHgx3zJ9UM2@cluster0.lso8k.mongodb.net/watermelon?retryWrites=true&w=majority",
+    "jwt_key": "superpassword01"
+}
